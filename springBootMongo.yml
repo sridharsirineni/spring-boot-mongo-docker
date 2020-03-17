@@ -12,7 +12,7 @@ spec:
         name: springboot
     spec:
       containers:
-      - image: dockerhandson/spring-boot-mongo:tagVersion
+      - image: sridharsirineni420/spring-boot-mongo:tagVersion
         name: springboot
         ports:
         - name: springboot
