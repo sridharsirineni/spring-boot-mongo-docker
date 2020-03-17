@@ -21,6 +21,7 @@ node{
           sh "docker login -u sridharsirineni420 -p ${DOKCER_HUB_PASSWORD}"
         }
         sh 'docker push sridharsirineni420/spring-boot-mongo:$BUILD_NUMBER'
+        sh 'docker rmi sridharsirineni420/spring-boot-mongo:$BUILD_NUMBER'
      }
      /**
      stage("Deploy To Kuberates Cluster"){
@@ -35,7 +36,8 @@ node{
       stage("Deploy To Kuberates Cluster"){
 	    sh "chmod +x changeTag.sh"
         sh "./changeTag.sh ${BUILD_NUMBER}"
-        sh 'kubectl apply -f springBootMongo.yml'
+        sh 'kubectl delete -f node-app-pod.yml || true'
+        sh 'kubectl apply -f node-app-pod.yml'
       } 
      
 }
